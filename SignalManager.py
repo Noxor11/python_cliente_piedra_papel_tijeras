@@ -1,12 +1,12 @@
 import Senal
-
+import GameFunctionality
 
 class SignalManager:
 	reader = None
 
 	writer = None
 
-	game = None
+	game: GameFunctionality.GameFunctionality = None
 
 	def __init__(self, reader, writer, game):
 		self.reader = reader
