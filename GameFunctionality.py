@@ -1,12 +1,11 @@
 from SignalManager import SignalManager
-from graphics.Graphics import Graphics
 
 
 class GameFunctionality:
 
-    graphics: Graphics
+    graphics: any
 
-    signalManager: SignalManager
+    signalManager: any
 
     continuarPartida: bool
     continuarTorneo: bool
@@ -17,6 +16,7 @@ class GameFunctionality:
 
     nombreTorneo: str = None
 
+
     def actualizarContinuarPartida(self, continuar: bool):
         self.continuarPartida = continuar
 
@@ -26,13 +26,13 @@ class GameFunctionality:
     def getGraphics(self):
         return self.graphics
 
-    def setGraphics(self, graphics: Graphics):
+    def setGraphics(self, graphics):
         self.graphics = graphics
 
     def getSignalManager(self):
         return self.signalManager
 
-    def setSignalManager(self, signalManager: SignalManager):
+    def setSignalManager(self, signalManager):
         self.signalManager = signalManager
 
     def setClaveTorneo(self, clave : str):

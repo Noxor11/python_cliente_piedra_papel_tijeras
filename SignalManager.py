@@ -1,26 +1,41 @@
+import threading
+
 import Senal
-import GameFunctionality
+from socket import socket
+
 
 class SignalManager:
-	reader = None
 
-	writer = None
+	socketAlServidor: socket
+	game = None
 
-	game: GameFunctionality.GameFunctionality = None
-
-	def __init__(self, reader, writer, game):
-		self.reader = reader
-		self.writer = writer
+	def __init__(self, socketAlServidor, game):
+		self.socketAlServidor = socketAlServidor
 		self.game = game
+
+	def nextLine(self, s: socket) -> str:
+		buffer = ""
+		c = 'a'
+
+		for i in range(1, 50):
+			c = s.recv(1, 0)
+			buffer += c
+
+			if c == '\n':
+				return buffer
+		return buffer
+
+	def start(self):
+		threading.Thread(target=self.run, args=()).start()
 
 	def run(self):
 
 		while True:
 			try:
-				# resultado_str = reader.nextLine()
+				resultado_str = self.nextLine(self.socketAlServidor)
 				senal = Senal.ERROR
 
-				# senal = int(resultado_str)
+				senal = int(resultado_str)
 
 				if senal == Senal.ENVIAR_NOMBRE:
 					self.manejarEnviarNombre()
