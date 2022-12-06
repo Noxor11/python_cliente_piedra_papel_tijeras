@@ -22,7 +22,7 @@ class PantallaEnfrentamiento(pantallaBase.PantallaBase):
         self.nombreRival.setGeometry(200,0, 500,100)
 
         self.mensaje = QLabel("", self)
-        self.mensaje(0,50, 500,100)
+        #self.mensaje(0,50, 500,100)
 
         self.panel_piedra = QToolBar("panel piedra")
         self.panel_piedra.setGeometry(54, 250, 100, 130)

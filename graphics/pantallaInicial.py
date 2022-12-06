@@ -1,4 +1,6 @@
 from PySide6.QtWidgets import (QApplication, QMainWindow, QWidget, QGridLayout, QPushButton, QHBoxLayout, QVBoxLayout, QLabel, QLineEdit)
+
+import Senal
 from graphics import pantallaBase
 
 
@@ -23,9 +25,12 @@ class PantallaInicial(pantallaBase.PantallaBase):
         self.createServer = QPushButton('Crear torneo', self)
         self.createServer.setGeometry(63, 228, 108,27)
 
-        self.createServer.clicked.connect(self.graphics.cambiarPantalla(graphics.getPantallaCreacionTorneo()))
+        self.createServer.clicked.connect(self.cambiarPantallaACreacionTorneo)
 
-        def manejarUnirseTorneo():
-            graphics.getFunctionality().getSignalManager().enviarSenal(Senal.SOLICITAR_LISTA_TORNEOS)
-            print("Enviada senal de solicitar lista torneos")
-            graphics.cambiarPantalla(graphics.getPantallaUnirseTorneo())
+    def manejarUnirseTorneo(self):
+        self.graphics.getFunctionality().getSignalManager().enviarSenal(Senal.SOLICITAR_LISTA_TORNEOS)
+        print("Enviada senal de solicitar lista torneos")
+        self.graphics.cambiarPantalla(self.graphics.getPantallaUnirseTorneo())
+
+    def cambiarPantallaACreacionTorneo(self):
+        self.graphics.cambiarPantalla(self.graphics.getPantallaCreacionTorneo())

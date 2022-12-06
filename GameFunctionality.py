@@ -1,21 +1,18 @@
-from SignalManager import SignalManager
-
-
 class GameFunctionality:
 
-    graphics: any
+    def __init__(self):
+        self.graphics: any
 
-    signalManager: any
+        self.signalManager: any
 
-    continuarPartida: bool
-    continuarTorneo: bool
+        self.continuarPartida: bool
+        self.continuarTorneo: bool
 
-    claveTorneo: str
+        self.claveTorneo: str
 
-    nombreDelJugador: str = None
+        self.nombreDelJugador: str = None
 
-    nombreTorneo: str = None
-
+        self.nombreTorneo: str = None
 
     def actualizarContinuarPartida(self, continuar: bool):
         self.continuarPartida = continuar

@@ -39,30 +39,30 @@ class PantallaConexion(pantallaBase.PantallaBase):
         #def cambiarPantalla(self):
         #graphics.cambiarPantalla(graphics.getPantallaInicial())
 
-        def onConectando():
-            self.conexion.setText("Conectando...")
+    def onConectando(self):
+        self.conexion.setText("Conectando...")
 
-            
 
-            self.lbl_nombre.setVisible(False)
-            self.nombreDeUsuario.setVisible(False)
-            self.enviar.setVisible(False)
 
-        def onConexionExitosa():
-            self.lbl_nombre.setGeometry(100,154,194,40)
-            
-            self.nombreDeUsuario.setGeometry(216,155,217,40)
+        self.lbl_nombre.setVisible(False)
+        self.nombreDeUsuario.setVisible(False)
+        self.enviar.setVisible(False)
 
-            self.enviar.setGeometry(200, 300,100,50)
+    def onConexionExitosa(self):
+        self.lbl_nombre.setGeometry(100,154,194,40)
 
-            self.lbl_nombre.setVisible(True)
-            self.nombreDeUsuario.setVisible(True)
-            self.enviar.setVisible(True)
+        self.nombreDeUsuario.setGeometry(216,155,217,40)
 
-            self.enviar.clicked.connect(self.hola)
+        self.enviar.setGeometry(200, 300,100,50)
 
-        def hola():
-            graphics.getFunctionality()
-            graphics.getSignalManager()
-            graphics.enviarPaquete(self.nombreDeUsuario.getText())
-            onConectando()
+        self.lbl_nombre.setVisible(True)
+        self.nombreDeUsuario.setVisible(True)
+        self.enviar.setVisible(True)
+
+        self.enviar.clicked.connect(self.hola)
+
+    def hola(self):
+        self.graphics.getFunctionality()
+        self.graphics.getSignalManager()
+        self.graphics.enviarPaquete(self.nombreDeUsuario.getText())
+        self.onConectando()

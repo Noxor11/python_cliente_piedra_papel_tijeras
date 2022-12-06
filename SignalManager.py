@@ -4,21 +4,20 @@ import Senal
 from socket import socket
 
 
-class SignalManager:
-
-	socketAlServidor: socket
-	game = None
+class SignalManager():
 
 	def __init__(self, socketAlServidor, game):
 		self.socketAlServidor = socketAlServidor
 		self.game = game
 
-	def nextLine(self, s: socket) -> str:
+
+	def nextLine(self) -> str:
 		buffer = ""
-		c = 'a'
+		c: str
 
 		for i in range(1, 50):
-			c = s.recv(1, 0)
+			c = self.socketAlServidor.recv(1, 0).decode("utf8")
+
 			buffer += c
 
 			if c == '\n':
@@ -32,7 +31,7 @@ class SignalManager:
 
 		while True:
 			try:
-				resultado_str = self.nextLine(self.socketAlServidor)
+				resultado_str = self.nextLine()
 				senal = Senal.ERROR
 
 				senal = int(resultado_str)
@@ -91,29 +90,31 @@ class SignalManager:
 					self.manejarError()
 
 
-			except Exception:
+			except RuntimeError as e:
+				print(e)
 				print("Desconectado del servidor.")
+				exit(-1)
 
 	def manejarPerderTorneo(self):
 		self.game.getGraphics().cambiarPantalla(self.game.getGraphics().getPantallaPerdedorTorneo())
 
 	def manejarNombreTorneo(self):
-		nombreDelTorneo = self.reader.nextLine()
+		nombreDelTorneo = self.nextLine(self.socketAlServidor)
 		self.game.getGraphics().setNombreTorneo(nombreDelTorneo)
 
 	def manejarClaveTorneo(self):
-		clave = self.reader.nextLine()
+		clave = self.nextLine(self.socketAlServidor)
 		self.game.getGraphics().onClaveTorneo(clave)
 
 	def enviarSenal(self, senal):
-		self.writer.println(senal)
+		self.socketAlServidor.send((str(senal) + "\n").encode('utf8'))
 
 	def enviarPaquete(self, paquete):
-		self.writer.println(paquete)
+		self.socketAlServidor.send(paquete)
 
 	def enviarSenalDeConexion(self):
 		self.game.getGraphics().onConectando()
-		self.writer.println(Senal.CONECTARSE)
+		self.socketAlServidor.send(Senal.CONECTARSE)
 
 	def manejarConexionExitosa(self):
 		print("Te has conectado!")
@@ -144,7 +145,7 @@ class SignalManager:
 	def manejarObtenerPuntaje(self):
 		# Obtener paquete puntaje
 
-		paquete = self.reader.nextLine()
+		paquete = self.nextLine(self.socketAlServidor)
 		puntajes_str = paquete.split("\\|")
 		puntajes = []
 
@@ -165,11 +166,11 @@ class SignalManager:
 		self.game.getGraphics().getPantallaEnfrentamiento().onEmpezarFinal()
 
 	def manejarNombreGanadorEnf(self):
-		ganador = self.reader.nextLine()
+		ganador = self.nextLine(self.socketAlServidor)
 		print("El ganador del enfrentamiento es: " + ganador)
 
 	def manejarNombreGanadorTor(self):
-		ganador = self.reader.nextLine()
+		ganador = self.nextLine(self.socketAlServidor)
 		print("El ganador del torneo es: " + ganador)
 
 	# Envía paquete
@@ -183,21 +184,21 @@ class SignalManager:
 			try:
 				# str = sc.nextLine()
 
-				if (str.equalsIgnoreCase("S")):
+				if str == "S" or str == "s":
 					senal = Senal.SI
-				elif (str.equalsIgnoreCase("N")):
+				elif str == "N" or str == "n":
 					senal = Senal.NO
 
-			except Exception:
+			except Exception as e:
 				print("Por favor, introduzca una opción válida.")
 
-		self.writer.println(senal)
+		self.socketAlServidor.send(senal)
 
 	def manejarError(self):
 		print("Hubo un error.")
 
 	def manejarJugadoresEnLobby(self):
-		jugadores = self.self.reader.nextLine()
+		jugadores = self.nextLine(self.socketAlServidor)
 		self.game.getGraphics().onJugadoresEnLobby(jugadores)
 		print("Jugadores en lobby: " + jugadores)
 
@@ -218,11 +219,11 @@ class SignalManager:
 		print("El lobby se encuentra lleno en este momento, espere unos minutos para volver a ingresar")
 
 	def manejarNombreDelRival(self):
-		nombre = self.reader.nextLine()
+		nombre = self.nextLine(self.socketAlServidor)
 		self.game.getGraphics().getPantallaEnfrentamiento().onNombreDelRival(nombre)
 
 	def manejarListaTorneos(self):
-		torneos = int(self.reader.nextLine())
+		torneos = self.nextLine(self.socketAlServidor)
 		print("Numero de torneos: " + torneos)
 
 		header = ["Nombre", "Cantidad de jugadores", "Clave"]

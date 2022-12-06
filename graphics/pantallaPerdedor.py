@@ -10,7 +10,6 @@ class PantallaPerdedor(pantallaBase.PantallaBase):
 
         self.graphics = graphics
 
-
         self.perdedor = QLabel("Felicitaciones!!! eres un tremendo perdedor!!! ", self)
         self.perdedor.setVisible(True)
         self.perdedor.setGeometry(57, 58, 371, 147)

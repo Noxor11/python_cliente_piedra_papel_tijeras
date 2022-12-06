@@ -11,34 +11,32 @@ from graphics.pantallaUnirseTorneo import PantallaUnirseTorneo
 from PySide6.QtWidgets import *
 from GameFunctionality import GameFunctionality
 
+import threading
+
+
 
 class Graphics(QApplication):
 
-	pantallaActual = None
 
-	pantallaGanadorTorneo: PantallaGanador
-
-	pantallaInicial: PantallaInicial
-
-	pantallaConexion: PantallaConexion
-
-	pantallaEnfrentamiento: PantallaEnfrentamiento
-
-	pantallaLobby: PantallaLobby
-
-	pantallaCreacionTorneo: PantallaCreacionTorneo
-
-	pantallaUnirseTorneo: PantallaUnirseTorneo
-
-	functionality: GameFunctionality
-	pantallaPerdedorTorneo: PantallaPerdedor
 
 	def __init__(self, functionality: GameFunctionality):
 		super().__init__()
-		self.functionality = functionality
 
 
+		self.functionality: GameFunctionality
 
+		self.pantallaPerdedorTorneo = PantallaPerdedor(self)
+		self.pantallaGanadorTorneo = PantallaGanador(self)
+		self.pantallaEnfrentamiento = PantallaEnfrentamiento(self)
+		self.pantallaInicial = PantallaInicial(self)
+		self.pantallaConexion = PantallaConexion(self)
+		self.pantallaLobby = PantallaLobby(self)
+		self.pantallaCreacionTorneo = PantallaCreacionTorneo(self)
+		self.pantallaUnirseTorneo = PantallaUnirseTorneo(self)
+		self.pantallaActual = self.pantallaInicial
+
+
+		self.initGraphics()
 		"""
 		self.setContentPane(pantallaInicial)
 		self.setSize(pantallaInicial.getSize())
@@ -48,19 +46,8 @@ class Graphics(QApplication):
 		"""
 
 	def initGraphics(self):
-		self.pantallaPerdedorTorneo = PantallaPerdedor(self)
-		self.pantallaGanadorTorneo = PantallaGanador(self)
-		self.pantallaEnfrentamiento = PantallaEnfrentamiento(self)
-		self.pantallaInicial = PantallaInicial(self)
-		self.pantallaConexion = PantallaConexion(self)
-		self.pantallaLobby = PantallaLobby(self)
-		self.pantallaCreacionTorneo = PantallaCreacionTorneo(self)
-		self.pantallaUnirseTorneo = PantallaUnirseTorneo(self)
-
-		self.initGraphics()
 		self.pantallaActual = self.pantallaInicial
 		self.pantallaActual.show()
-		self.exec()
 
 	def onConectando(self):
 		self.cambiarPantalla(self.pantallaConexion)
@@ -124,7 +111,6 @@ class Graphics(QApplication):
 		self.pantallaLobby.setNombreTorneo(nombreTorneo)
 
 	def cambiarPantalla(self, pantallaSiguiente: PantallaBase):
-
 		self.pantallaActual.setVisible(False)
 		self.pantallaActual = pantallaSiguiente
 		pantallaSiguiente.setVisible(True)
@@ -155,3 +141,7 @@ class Graphics(QApplication):
 
 	def getPantallaPerdedorTorneo(self):
 		return self.pantallaPerdedorTorneo
+
+
+
+

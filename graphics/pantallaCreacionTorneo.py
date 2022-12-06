@@ -10,7 +10,7 @@ class PantallaCreacionTorneo(pantallaBase.PantallaBase):
 
         self.graphics = graphics
 
-        senalEnviada = False
+        self.senalEnviada = False
 
         self.pnl_partidaPublica = QToolBar("")
         self.pnl_partidaPublica.setGeometry(125, 230, 250, 250)   
@@ -28,8 +28,8 @@ class PantallaCreacionTorneo(pantallaBase.PantallaBase):
 
         
 
-        self.pnl_partidaPublica.clicked.connect(self.graphics.cambiarPantalla(Senal.CREAR_TORNEO_PUBLICO))
-        self.pnl_partidaPrivada.clicked.connect(self.graphics.cambiarPantalla(Senal.CREAR_TORNEO_PRIVADO))
+        # self.pnl_partidaPublica.clicked.connect(self.graphics.cambiarPantalla(Senal.CREAR_TORNEO_PUBLICO))
+        # self.pnl_partidaPrivada.clicked.connect(self.graphics.cambiarPantalla(Senal.CREAR_TORNEO_PRIVADO))
 
         
 
