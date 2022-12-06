@@ -18,7 +18,6 @@ if __name__ == "__main__":
 	game = GameFunctionality()
 	gf = graphics.Graphics.Graphics(game)
 
-
 	game.setGraphics(gf)
 
 	socketAlServidor = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

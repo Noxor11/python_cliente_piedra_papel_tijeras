@@ -31,7 +31,6 @@ class Graphics(QApplication):
 
 		self.pantallaPerdedorTorneo = PantallaPerdedor(self)
 		self.pantallaPerdedorTorneo.hide()
-		self.window.layout()
 
 		self.pantallaGanadorTorneo = PantallaGanador(self)
 		self.pantallaGanadorTorneo.hide()
@@ -51,11 +50,11 @@ class Graphics(QApplication):
 		self.pantallaUnirseTorneo = PantallaUnirseTorneo(self)
 		self.pantallaUnirseTorneo.hide()
 
-
 		self.pantallaInicial = PantallaInicial(self)
+		self.pantallaInicial.hide()
+
 		self.pantallaActual = self.pantallaInicial
 		self.pantallaActual.show()
-
 
 		self.initGraphics()
 		"""
@@ -68,7 +67,6 @@ class Graphics(QApplication):
 
 	def initGraphics(self):
 		self.pantallaActual = self.pantallaInicial
-		self.setActiveWindow(self.window)
 		self.window.show()
 
 	def onConectando(self):
@@ -78,7 +76,7 @@ class Graphics(QApplication):
 		print("GRAPHICS dice: Conectado!")
 		self.pantallaConexion.onConexionExitosa()
 
-	def getFunctionality(self):
+	def getFunctionality(self) -> GameFunctionality:
 		return self.functionality
 
 	def onEnviarSeleccion(self) :
@@ -125,9 +123,10 @@ class Graphics(QApplication):
 	def getPantallaUnirseTorneo(self) :
 		return self.pantallaUnirseTorneo
 
-	def onClaveTorneo(self, clave : str):
+	def onClaveTorneo(self, clave: str):
 		self.functionality.setClaveTorneo(clave)
 		self.pantallaLobby.onClaveTorneo(clave)
+
 
 	def setNombreTorneo(self, nombreTorneo: str) :
 		self.pantallaLobby.setNombreTorneo(nombreTorneo)

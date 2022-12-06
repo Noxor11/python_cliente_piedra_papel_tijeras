@@ -32,6 +32,6 @@ class GameFunctionality:
     def setSignalManager(self, signalManager):
         self.signalManager = signalManager
 
-    def setClaveTorneo(self, clave : str):
+    def setClaveTorneo(self, clave: str):
         self.claveTorneo = clave
 

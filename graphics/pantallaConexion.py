@@ -12,7 +12,7 @@ class PantallaConexion(pantallaBase.PantallaBase):
 
 
         self.lbl_nombre = QLabel("Nombre de usuario: ", self)
-        self.conexion = QLabel("Conectando...", self)
+        self.conexion = QLabel("", self)
         self.conexion.resize(200,200)
 
         self.nombreDeUsuario = QLineEdit(self)
@@ -49,6 +49,7 @@ class PantallaConexion(pantallaBase.PantallaBase):
         self.enviar.setVisible(False)
 
     def onConexionExitosa(self):
+        self.conexion.setText("Conexión exitosa!")
         self.lbl_nombre.setGeometry(100,154,194,40)
 
         self.nombreDeUsuario.setGeometry(216,155,217,40)
@@ -62,7 +63,5 @@ class PantallaConexion(pantallaBase.PantallaBase):
         self.enviar.clicked.connect(self.hola)
 
     def hola(self):
-        self.graphics.getFunctionality()
-        self.graphics.getSignalManager()
-        self.graphics.enviarPaquete(self.nombreDeUsuario.getText())
+        self.graphics.getFunctionality().getSignalManager().enviarPaquete(self.nombreDeUsuario.text())
         self.onConectando()

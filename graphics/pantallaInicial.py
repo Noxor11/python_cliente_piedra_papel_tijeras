@@ -4,7 +4,6 @@ import Senal
 from graphics import pantallaBase
 
 
-    
 class PantallaInicial(pantallaBase.PantallaBase):
     def __init__(self, graphics):
         super().__init__(graphics)

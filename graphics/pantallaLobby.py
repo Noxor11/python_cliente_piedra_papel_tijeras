@@ -10,37 +10,29 @@ class PantallaLobby(pantallaBase.PantallaBase):
 
         self.graphics = graphics
 
-
         self.lbl_jugadores = QLabel("Jugadores en el lobby: ", self)
         self.lbl_jugadores.setGeometry(50, 250, 200,30)
 
-
-        self.jugadores = QLabel("", self)
+        self.jugadores = QLabel(self)
         self.jugadores.setGeometry(0, 80, 500, 40)
 
-        self.lbl_nombreTorneo = QLabel("", self)
+        self.lbl_nombreTorneo = QLabel(self)
         self.lbl_nombreTorneo.setGeometry(0, 80, 500, 40)
-        
 
-        
+        self.lbl_MostrarClaveTorneo = QLabel(self)
+        self.lbl_claveTorneo = QTextEdit(self)
 
-        def onJugadoresEnLobby(j):
-            self.jugadores.setText(j)
-           
 
-        def onClaveTorneo(clave):
-            self.lbl_MostrarClaveTorneo = QLabel("Clave del torneo:", self)
-            self.lbl_MostrarClaveTorneo.setGeometry(40, 130, 200, 30)
 
-            self.lbl_claveTorneo  = QTextEdit()
-            self.lbl_claveTorneo.isEnabled(False) 
-            self.lbl_claveTorneo.setGeometry(40, 170, 150, 30)
-            self.lbl_claveTorneo.setText(clave)
+    def onJugadoresEnLobby(self, jugadores):
+        self.jugadores.setText(jugadores)
 
-            self.revalidate()
-            self.repaint()
+    def onClaveTorneo(self, clave):
+        self.lbl_MostrarClaveTorneo.setText("Clave del torneo:")
+        self.lbl_MostrarClaveTorneo.setGeometry(40, 130, 200, 30)
 
-            
+        self.lbl_claveTorneo.setGeometry(40, 170, 150, 30)
+        self.lbl_claveTorneo.setText(clave)
 
-        def setNombreTorneo(nombreTorneo): 
-            self.lbl_nombreTorneo.setText(nombreTorneo)
+    def setNombreTorneo(self, nombreTorneo):
+        self.lbl_nombreTorneo.setText(nombreTorneo)

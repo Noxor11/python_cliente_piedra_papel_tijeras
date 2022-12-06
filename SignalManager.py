@@ -1,15 +1,11 @@
 import threading
-
 import Senal
-from socket import socket
-
 
 class SignalManager():
 
 	def __init__(self, socketAlServidor, game):
 		self.socketAlServidor = socketAlServidor
 		self.game = game
-
 
 	def nextLine(self) -> str:
 		buffer = ""
@@ -99,18 +95,18 @@ class SignalManager():
 		self.game.getGraphics().cambiarPantalla(self.game.getGraphics().getPantallaPerdedorTorneo())
 
 	def manejarNombreTorneo(self):
-		nombreDelTorneo = self.nextLine(self.socketAlServidor)
+		nombreDelTorneo = self.nextLine()
 		self.game.getGraphics().setNombreTorneo(nombreDelTorneo)
 
 	def manejarClaveTorneo(self):
-		clave = self.nextLine(self.socketAlServidor)
+		clave = self.nextLine()
 		self.game.getGraphics().onClaveTorneo(clave)
 
 	def enviarSenal(self, senal):
 		self.socketAlServidor.send((str(senal) + "\n").encode('utf8'))
 
 	def enviarPaquete(self, paquete):
-		self.socketAlServidor.send(paquete)
+		self.socketAlServidor.send((str(paquete) + "\n").encode('utf8'))
 
 	def enviarSenalDeConexion(self):
 		self.game.getGraphics().onConectando()
@@ -145,7 +141,7 @@ class SignalManager():
 	def manejarObtenerPuntaje(self):
 		# Obtener paquete puntaje
 
-		paquete = self.nextLine(self.socketAlServidor)
+		paquete = self.nextLine()
 		puntajes_str = paquete.split("\\|")
 		puntajes = []
 
@@ -166,11 +162,11 @@ class SignalManager():
 		self.game.getGraphics().getPantallaEnfrentamiento().onEmpezarFinal()
 
 	def manejarNombreGanadorEnf(self):
-		ganador = self.nextLine(self.socketAlServidor)
+		ganador = self.nextLine()
 		print("El ganador del enfrentamiento es: " + ganador)
 
 	def manejarNombreGanadorTor(self):
-		ganador = self.nextLine(self.socketAlServidor)
+		ganador = self.nextLine()
 		print("El ganador del torneo es: " + ganador)
 
 	# Envía paquete
@@ -198,7 +194,7 @@ class SignalManager():
 		print("Hubo un error.")
 
 	def manejarJugadoresEnLobby(self):
-		jugadores = self.nextLine(self.socketAlServidor)
+		jugadores = self.nextLine()
 		self.game.getGraphics().onJugadoresEnLobby(jugadores)
 		print("Jugadores en lobby: " + jugadores)
 
@@ -219,11 +215,11 @@ class SignalManager():
 		print("El lobby se encuentra lleno en este momento, espere unos minutos para volver a ingresar")
 
 	def manejarNombreDelRival(self):
-		nombre = self.nextLine(self.socketAlServidor)
+		nombre = self.nextLine()
 		self.game.getGraphics().getPantallaEnfrentamiento().onNombreDelRival(nombre)
 
 	def manejarListaTorneos(self):
-		torneos = self.nextLine(self.socketAlServidor)
+		torneos = self.nextLine()
 		print("Numero de torneos: " + torneos)
 
 		header = ["Nombre", "Cantidad de jugadores", "Clave"]
