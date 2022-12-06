@@ -22,18 +22,39 @@ class Graphics(QApplication):
 	def __init__(self, functionality: GameFunctionality):
 		super().__init__()
 
+		self.functionality = functionality
+
+		self.window = QMainWindow()
+		self.window.setFixedSize(500,500)
 
 		self.functionality: GameFunctionality
 
 		self.pantallaPerdedorTorneo = PantallaPerdedor(self)
+		self.pantallaPerdedorTorneo.hide()
+		self.window.layout()
+
 		self.pantallaGanadorTorneo = PantallaGanador(self)
+		self.pantallaGanadorTorneo.hide()
+
 		self.pantallaEnfrentamiento = PantallaEnfrentamiento(self)
-		self.pantallaInicial = PantallaInicial(self)
+		self.pantallaEnfrentamiento.hide()
+
 		self.pantallaConexion = PantallaConexion(self)
+		self.pantallaConexion.hide()
+
 		self.pantallaLobby = PantallaLobby(self)
+		self.pantallaLobby.hide()
+
 		self.pantallaCreacionTorneo = PantallaCreacionTorneo(self)
+		self.pantallaCreacionTorneo.hide()
+
 		self.pantallaUnirseTorneo = PantallaUnirseTorneo(self)
+		self.pantallaUnirseTorneo.hide()
+
+
+		self.pantallaInicial = PantallaInicial(self)
 		self.pantallaActual = self.pantallaInicial
+		self.pantallaActual.show()
 
 
 		self.initGraphics()
@@ -47,7 +68,8 @@ class Graphics(QApplication):
 
 	def initGraphics(self):
 		self.pantallaActual = self.pantallaInicial
-		self.pantallaActual.show()
+		self.setActiveWindow(self.window)
+		self.window.show()
 
 	def onConectando(self):
 		self.cambiarPantalla(self.pantallaConexion)
@@ -111,9 +133,9 @@ class Graphics(QApplication):
 		self.pantallaLobby.setNombreTorneo(nombreTorneo)
 
 	def cambiarPantalla(self, pantallaSiguiente: PantallaBase):
-		self.pantallaActual.setVisible(False)
+		self.pantallaActual.hide()
 		self.pantallaActual = pantallaSiguiente
-		pantallaSiguiente.setVisible(True)
+		pantallaSiguiente.show()
 
 		"""
 		if(pantallaActual instanceof PantallaCreacionTorneo):
@@ -141,7 +163,3 @@ class Graphics(QApplication):
 
 	def getPantallaPerdedorTorneo(self):
 		return self.pantallaPerdedorTorneo
-
-
-
-
