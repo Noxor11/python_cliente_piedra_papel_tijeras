@@ -142,7 +142,7 @@ class SignalManager():
 		# Obtener paquete puntaje
 
 		paquete = self.nextLine()
-		puntajes_str = paquete.split("\\|")
+		puntajes_str = paquete.split("|")
 		puntajes = []
 
 		for puntaje in puntajes_str:
