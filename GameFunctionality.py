@@ -10,9 +10,9 @@ class GameFunctionality:
 
         self.claveTorneo: str
 
-        self.nombreDelJugador: str = None
+        self.nombreDelJugador: str
 
-        self.nombreTorneo: str = None
+        self.nombreTorneo: str
 
     def actualizarContinuarPartida(self, continuar: bool):
         self.continuarPartida = continuar

@@ -15,11 +15,11 @@ class PantallaLobby(pantallaBase.PantallaBase):
         self.lbl_jugadores.setGeometry(50, 250, 200,30)
 
         self.jugadores = QLabel(self)
-        self.jugadores.setGeometry(210, 250, 500, 40)
+        self.jugadores.setGeometry(210, 255, 500, 40)
 
         self.lbl_nombreTorneo = QLabel(self)
         self.lbl_nombreTorneo.setFont(QFont('Arial', 20))
-        self.lbl_nombreTorneo.setGeometry(0, 80, 500, 40)
+        self.lbl_nombreTorneo.setGeometry(0, 80, 500, 60)
         self.lbl_nombreTorneo.show()
 
         self.lbl_MostrarClaveTorneo = QLabel(self)

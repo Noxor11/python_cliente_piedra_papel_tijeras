@@ -222,19 +222,14 @@ class SignalManager():
 		torneos = self.nextLine()
 		print("Numero de torneos: " + torneos)
 
-		header = ["Nombre", "Cantidad de jugadores", "Clave"]
+		datos = []
 
-	# modelo = Table(header, 0)
+		for i in range(0, int(torneos)):
+			datos.append(self.nextLine())
 
-	# for (int i = 0 i < torneos i++) :
-	#    String datos = self.reader.nextLine()
-	#    String[] datosSplit = datos.split("\\|")
-	#    modelo.addRow(datosSplit)
-	#    print("Datos recibidos: " + datos)
+		print("Datos recibidos:", datos)
 
-	# JTable table = new JTable(modelo)
-	# table.getColumnModel().getColumn(2).setMaxWidth(0) # Ocultar columna de clave
-	# self.game.getGraphics().getPantallaUnirseTorneo().onListaTorneoRecibida(table)
+		self.game.getGraphics().getPantallaUnirseTorneo().onListaTorneoRecibida(datos)
 
 	def manejarEmpate(self):
 		self.game.getGraphics().getPantallaEnfrentamiento().onEmpate()
