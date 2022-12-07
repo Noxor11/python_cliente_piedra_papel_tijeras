@@ -1,5 +1,8 @@
-from PySide6.QtWidgets import (QApplication, QToolBar, QMainWindow, QWidget, QGridLayout, QPushButton, QHBoxLayout, QVBoxLayout, QLabel, QLineEdit, QTextEdit)
+from PySide6.QtWidgets import *
+from PySide6.QtGui import *
+from PySide6.QtCore import *
 from graphics import pantallaBase
+import sys
 
 
 class PantallaEnfrentamiento(pantallaBase.PantallaBase):
@@ -22,36 +25,21 @@ class PantallaEnfrentamiento(pantallaBase.PantallaBase):
         self.mensaje = QLabel(self)
         #self.mensaje(0,50, 500,100)
 
-        self.panel_piedra = QToolBar("panel piedra")
-        self.panel_piedra.setGeometry(54, 250, 100, 130)
-
-        self.piedra = QLabel("", self)
-        self.piedra.setStyleSheet("border-image:url(:/graphics/img/piedra.png)")
-
-        self.lblPiedra = QLabel("Piedra", self)
-        
-        self.panel_piedra.addWidget(self.lblPiedra)
-
-        self.panel_papel = QToolBar("panel papel")
-        self.panel_papel.setGeometry(200, 250, 100, 130)
 
         self.papel_img = QLabel("", self)
-        self.papel_img.setStyleSheet("border-image:url(:/graphics/img/papel.png)")
-
-        self.papel = QLabel("Papel", self)
-
-        self.panel_papel.addWidget(self.papel)
-
-        self.panel_tijeras = QToolBar("panel tijeras")
-        self.panel_tijeras.setGeometry(357, 250, 100, 130)
+        self.papel_img.setStyleSheet("image:url(:/graphics/img/papel.png)")
+        self.papel_img.setGeometry(170, 150, 50, 50)
+        self.lbl_papel = QLabel("Papel", self)
+        self.lbl_papel.setGeometry(170, 230, 50, 50)
 
         self.tijeras_img = QLabel(self)
         self.tijeras_img.setStyleSheet("border-image:url(:/graphics/img/tijeras.png)")
+        self.papel_img.setGeometry(240, 150, 50, 50)
+        self.lbl_tijeras = QLabel(self)
+        self.lbl_tijeras.setText("Tijeras")
+        self.lbl_tijeras.setGeometry(240, 230, 50, 50)
 
-        self.tijeras = QLabel(self)
-        self.tijeras.setText("Tijeras")
         
-        self.panel_tijeras.addWidget(self.tijeras)
 
     def onNombreDelRival(self, nombre):
         self.nombreRival.setText("Rival: " + nombre)

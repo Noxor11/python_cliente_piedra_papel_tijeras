@@ -60,8 +60,8 @@ class PantallaConexion(pantallaBase.PantallaBase):
         self.nombreDeUsuario.setVisible(True)
         self.enviar.setVisible(True)
 
-        self.enviar.clicked.connect(self.hola)
+        self.enviar.clicked.connect(self.enviarNombreDeUsuario)
 
-    def hola(self):
+    def enviarNombreDeUsuario(self):
         self.graphics.getFunctionality().getSignalManager().enviarPaquete(self.nombreDeUsuario.text())
         self.onConectando()

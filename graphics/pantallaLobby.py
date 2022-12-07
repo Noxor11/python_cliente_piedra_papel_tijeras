@@ -1,4 +1,5 @@
-from PySide6.QtWidgets import (QApplication, QMainWindow, QWidget, QGridLayout, QPushButton, QHBoxLayout, QVBoxLayout, QLabel, QLineEdit, QTextEdit)
+from PySide6.QtWidgets import *
+from PySide6.QtGui import QFont
 from graphics import pantallaBase
 
 
@@ -14,13 +15,18 @@ class PantallaLobby(pantallaBase.PantallaBase):
         self.lbl_jugadores.setGeometry(50, 250, 200,30)
 
         self.jugadores = QLabel(self)
-        self.jugadores.setGeometry(0, 80, 500, 40)
+        self.jugadores.setGeometry(210, 250, 500, 40)
 
         self.lbl_nombreTorneo = QLabel(self)
+        self.lbl_nombreTorneo.setFont(QFont('Arial', 20))
         self.lbl_nombreTorneo.setGeometry(0, 80, 500, 40)
+        self.lbl_nombreTorneo.show()
 
         self.lbl_MostrarClaveTorneo = QLabel(self)
+        self.lbl_MostrarClaveTorneo.hide()
+
         self.lbl_claveTorneo = QTextEdit(self)
+        self.lbl_claveTorneo.hide()
 
 
 
@@ -36,3 +42,4 @@ class PantallaLobby(pantallaBase.PantallaBase):
 
     def setNombreTorneo(self, nombreTorneo):
         self.lbl_nombreTorneo.setText(nombreTorneo)
+
