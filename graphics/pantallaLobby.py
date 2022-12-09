@@ -23,10 +23,12 @@ class PantallaLobby(pantallaBase.PantallaBase):
         self.lbl_nombreTorneo.show()
 
         self.lbl_MostrarClaveTorneo = QLabel(self)
+        self.lbl_MostrarClaveTorneo.setText("Clave del torneo:")
+        self.lbl_MostrarClaveTorneo.setGeometry(40, 130, 200, 30)
         self.lbl_MostrarClaveTorneo.hide()
 
-        self.lbl_claveTorneo = QTextEdit(self)
-        self.lbl_claveTorneo.hide()
+        self.lbl_claveTorneo = QLabel(self)
+        self.lbl_claveTorneo.setGeometry(40, 170, 150, 30)
 
 
 
@@ -34,10 +36,7 @@ class PantallaLobby(pantallaBase.PantallaBase):
         self.jugadores.setText(jugadores)
 
     def onClaveTorneo(self, clave):
-        self.lbl_MostrarClaveTorneo.setText("Clave del torneo:")
-        self.lbl_MostrarClaveTorneo.setGeometry(40, 130, 200, 30)
-
-        self.lbl_claveTorneo.setGeometry(40, 170, 150, 30)
+        self.lbl_MostrarClaveTorneo.show()
         self.lbl_claveTorneo.setText(clave)
 
     def setNombreTorneo(self, nombreTorneo):

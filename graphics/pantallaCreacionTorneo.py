@@ -42,22 +42,19 @@ class PantallaCreacionTorneo(pantallaBase.PantallaBase):
 
         self.lbl_nombreTorneo = QLabel(self)
         self.lbl_nombreTorneo.setText("Introduzca el nombre del torneo.")
-        self.lbl_nombreTorneo.setGeometry(50, 50, 200, 30)
+        self.lbl_nombreTorneo.setGeometry(150, 50, 200,30)
         self.lbl_nombreTorneo.show()
 
         self.txt_nombreTorneo = QTextEdit(self)
-        self.txt_nombreTorneo.setGeometry(50, 90, 200, 30)
+        self.txt_nombreTorneo.setGeometry(150, 90, 200, 30)
         self.txt_nombreTorneo.show()
 
         self.btn_enviar = QPushButton(self)
         self.btn_enviar.setText("Enviar")
-        self.btn_enviar.setGeometry(70, 320, 80, 30)
+        self.btn_enviar.setGeometry(190, 150, 80, 30)
         self.btn_enviar.clicked.connect(lambda: self.cambiarPantallita(senal))
         self.btn_enviar.show()
 
-        self.lbl_nombreTorneo = QLabel("Introduzca el nombre del torneo.", self)
-        self.lbl_nombreTorneo.setGeometry(50, 50, 200,30)
-        self.lbl_nombreTorneo.show()
 
 
     def cambiarPantallita(self, senal):

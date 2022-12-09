@@ -14,6 +14,7 @@ class PantallaConexion(pantallaBase.PantallaBase):
         self.lbl_nombre = QLabel("Nombre de usuario: ", self)
         self.conexion = QLabel("", self)
         self.conexion.resize(200,200)
+        self.conexion.setGeometry(150, 20, 200, 200)
 
         self.nombreDeUsuario = QLineEdit(self)
         
